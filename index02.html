@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filha D'Água - Arte em Impressão 3D</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap');
+        
+        :root {
+            --deep-blue: #1e3a5f;
+            --mid-blue: #3d6a94;
+            --light-blue: #a8cce8;
+            --pale-blue: #e0f0ff;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--deep-blue);
+            background-color: var(--pale-blue);
+        }
+        
+        header {
+            background: linear-gradient(180deg, var(--deep-blue) 0%, var(--mid-blue) 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--light-blue);
+        }
+        
+        .hero {
+            background: url('/api/placeholder/1200/600') center center/cover;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .wave-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            z-index: 1;
+        }
+        
+        .hero-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23ffffff'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23ffffff'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E") bottom center/cover no-repeat;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            z-index: 3;
+            padding: 0 2rem;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--deep-blue);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 400;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--mid-blue);
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section_title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--deep-blue);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+            height: 250px;
+            background-color: var(--white);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(30,58,95,0.8) 0%, rgba(30,58,95,0) 100%);
+            padding: 1rem;
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .about {
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23e0f0ff'%3E%3C/path%3E%3C/svg%3E") top center/cover no-repeat;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            padding-top: 4rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--deep-blue);
+        }
+        
+        .about-content p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .categories {
+            background: linear-gradient(180deg, var(--white) 0%, var(--pale-blue) 100%);
+        }
+        
+        .categories-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .category-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--mid-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .category-card h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .category-card p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .contact {
+            background: url('/api/placeholder/1200/600') center center/cover;
+            position: relative;
+            color: var(--white);
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, rgba(30,58,95,0.9) 0%, rgba(61,106,148,0.9) 100%);
+        }
+        
+        .contact-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: var(--light-blue);
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--mid-blue);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background-color: var(--deep-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--mid-blue);
+        }
+        
+        footer {
+            background-color: var(--deep-blue);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: -150px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z' fill='%231e3a5f'%3E%3C/path%3E%3C/svg%3E") bottom center/cover no-repeat;
+        }
+        
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            color: var(--white);
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--mid-blue);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Filha D'Água</a>
+                <ul class="nav-links">
+                    <li><a href="#gallery">Galeria</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#categories">Categorias</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="wave-overlay"></div>
+        <div class="hero-waves"></div>
+        <div class="hero-content container">
+            <h1>Filha D'Água</h1>
+            <img src="api/placeholder/logo.png" width="250px" />
+            <p>Onde o mar encontra a arte em cada peça. Impressões 3D únicas inspiradas nas águas e pela ancestralidade.</p>
+            <a href="#gallery" class="btn">Ver Galeria</a>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section_title">Galeria</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/oxossi.jpg" alt="Oxóssi">
+                    <div class="gallery-caption">Oxóssi</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/link.jpg" alt="Link">
+                    <div class="gallery-caption">Link</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/oxala.jpg" alt="Oxala">
+                    <div class="gallery-caption">Oxala</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/proceso.jpg" alt="Preto Velho">
+                    <div class="gallery-caption">Preto Velho</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/iemanja.jpg" alt="Iemanjá">
+                    <div class="gallery-caption">Iemanjá</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/oxum.jpg" alt="Oxum">
+                    <div class="gallery-caption">Oxum</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/kratos.jpg" alt="Personagem de Jogo">
+                    <div class="gallery-caption">Personagem de Jogo</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="api/placeholder/exemplos/personalizado.png" alt="Peça Personalizada">
+                    <div class="gallery-caption">Peça Personalizada</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-wave"></div>
+        <div class="container about-container">
+            <div class="about-image">
+                <img src="api/placeholder/proceso.jpg" alt="Espaço de Criação">
+            </div>
+            <div class="about-content">
+                <h2>Sobre a Filha D'Água</h2>
+                <p>Inspirada pelas águas e por um legado de amor e ofício de minha mãe, cada peça é feita com alma. Ofereço esculturas, peças personalizadas e impressões 3D únicas, pintadas à mão com cuidado e intenção.</p>
+                <p>A Filha D'Água nasceu da paixão por unir tecnologia moderna com a ancestralidade e a espiritualidade. Cada criação carrega consigo a energia das águas e a conexão com nossas raízes.</p>
+                <p>Especializada em peças da umbanda e personagens de jogos, busco trazer para o mundo físico aquilo que habita nos reinos da fé e da imaginação.</p>
+                <a href="#contact" class="btn">Entre em contato</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section_title">Nossas Especialidades</h2>
+            <div class="categories-container">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Entidades da Umbanda</h3>
+                    <p>Peças que representam orixás, guias e entidades da umbanda, criadas com respeito à tradição e espiritualidade.</p>
+                    <a href="#" class="btn">Ver Peças</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Personagens de Jogos</h3>
+                    <p>Recriações fiéis de seus personagens favoritos de jogos, com atenção aos detalhes e acabamento de qualidade.</p>
+                    <a href="#" class="btn">Ver Peças</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Peças Personalizadas</h3>
+                    <p>Criações únicas baseadas em suas ideias e necessidades, desenvolvidas em colaboração para materializar sua visão.</p>
+                    <a href="#" class="btn">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h2>Entre em Contato</h2>
+                <p>Quer encomendar uma peça personalizada? Tem alguma dúvida sobre nossos produtos? Entre em contato conosco!</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>Bauru, SP</span>
+                    </div>
+                    <div style="display: none;" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>contato@filhadagua.com.br</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <span>(16) 99750-4738</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <span>@_filhadagua</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Envie uma Mensagem</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Seu Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Seu Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Sua Mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Filha D'Água</h3>
+                <p>Onde o mar encontra a arte em cada peça</p>
+            </div>
+            <div class="social-links">
+                <a href="#" style="display: none;" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/_filhadagua/" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5516997504738" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.tiktok.com/@_filhadagua" class="social-link"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Filha D'Água - Todos os direitos reservados
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Rolagem suave para links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animação de scroll para elementos
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.75) {
+                    section.style.opacity = 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
